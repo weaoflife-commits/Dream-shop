@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Products - Dream eShop</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <div class="navbar">
+            <div class="logo">
+                <h1>Dream eShop</h1>
+            </div>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="cart.html">Cart</a>
+                <a href="orders.html">Orders</a>
+                <a href="admin.html">Admin</a>
+                <a href="admin-panel.html">Product Management</a>
+            </div>
+            <div class="user-info">
+                <span id="balance">Balance: $1,000,000,000</span>
+                <input type="text" id="username" placeholder="Enter username" value="admin">
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <h2>Test Product Display</h2>
+            
+            <div class="admin-panel">
+                <h3>Product Count</h3>
+                <p id="product-count">Loading...</p>
+                
+                <h3>First Product Details</h3>
+                <div id="first-product">Loading...</div>
+                
+                <button class="btn" onclick="testProducts()">Test Products</button>
+                <button class="btn" onclick="clearStorage()">Clear Storage</button>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2023 Dream eShop - Virtual Shopping Experience | All purchases are simulated!</p>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        function testProducts() {
+            // Initialize data
+            initializeData();
+            
+            // Get products
+            const products = getProducts();
+            
+            // Display product count
+            document.getElementById('product-count').textContent = `Total products: ${products.length}`;
+            
+            // Display first product details
+            if (products.length > 0) {
+                const firstProduct = products[0];
+                document.getElementById('first-product').innerHTML = `
+                    <p><strong>Name:</strong> ${firstProduct.name}</p>
+                    <p><strong>Price:</strong> $${firstProduct.price}</p>
+                    <p><strong>Description:</strong> ${firstProduct.description}</p>
+                    <p><strong>Image URL:</strong> ${firstProduct.image}</p>
+                    <img src="${firstProduct.image}" alt="${firstProduct.name}" style="max-width: 200px; height: auto;">
+                `;
+            }
+        }
+        
+        function clearStorage() {
+            localStorage.clear();
+            alert('Local storage cleared!');
+            document.getElementById('product-count').textContent = 'Storage cleared';
+            document.getElementById('first-product').innerHTML = 'Refresh page to reload data';
+        }
+        
+        // Initialize when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            updateBalanceDisplay();
+        });
+    </script>
+</body>
+</html>
